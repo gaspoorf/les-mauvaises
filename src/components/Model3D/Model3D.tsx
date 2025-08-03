@@ -83,7 +83,7 @@ export function Model3D({ modelPath, targetPosition, targetRotation, targetScale
     <group ref={wrapperRef}>
       <Center>
         <group ref={modelRef}>
-          <primitive object={scene} dispose={null} />
+          {/* <primitive object={scene} dispose={null} /> */}
         </group>
       </Center>
     </group>
