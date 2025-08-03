@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from "react";
-import { Center } from "@react-three/drei";
+import { useGLTF, Center } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import gsap from "gsap";
 
@@ -13,8 +13,8 @@ interface Model3DProps {
 }
 
 
-export function Model3D({ targetPosition, targetRotation, targetScale }: Model3DProps) {
-  // const { scene } = useGLTF(modelPath);
+export function Model3D({ modelPath, targetPosition, targetRotation, targetScale }: Model3DProps) {
+  const { scene } = useGLTF(modelPath);
   const modelRef = useRef<any>(null);
   const wrapperRef = useRef<any>(null);
   const targetRotationY = useRef(0);
@@ -83,7 +83,7 @@ export function Model3D({ targetPosition, targetRotation, targetScale }: Model3D
     <group ref={wrapperRef}>
       <Center>
         <group ref={modelRef}>
-          {/* <primitive object={scene} dispose={null} /> */}
+          <primitive object={scene} dispose={null} />
         </group>
       </Center>
     </group>
