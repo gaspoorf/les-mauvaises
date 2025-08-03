@@ -41,7 +41,7 @@ export function Scene3D({ children, onCameraReady, lookAtTarget }: Scene3DProps)
 
   return (
     <div className={styles.canvasContainer}>
-      <Canvas camera={{ position: [-10, 10, 30], fov: 50 }}>
+      <Canvas camera={{ position: [-10, 10, 30], fov: 50 }} gl={{ antialias: false }}>
         <MouseParallaxCamera onCameraReady={onCameraReady} lookAtTarget={lookAtTarget} />
         <ambientLight intensity={0.5} />
         <directionalLight position={[10, 10, 10]} intensity={2} />

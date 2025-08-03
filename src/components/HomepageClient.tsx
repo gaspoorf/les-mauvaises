@@ -12,7 +12,7 @@ interface HomepageClientProps {
 
 export default function HomepageClient({ projects }: HomepageClientProps) {
   const heroRef = useRef<HTMLElement>(null);
-  const heroVisible = useHeroVisible(heroRef, 0.000001);
+  const heroVisible = useHeroVisible(heroRef, 0.00000001);
 
   return (
     <>

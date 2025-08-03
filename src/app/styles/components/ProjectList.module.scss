@@ -25,7 +25,9 @@
 .detailsProject{
     color: $color-white;
     width: 50vw;
-    position: absolute;
+    position: fixed;
+    top: 45%;
+    transform: translateY(-50%);
     right: 0;
     /* top: 2rem; */
     margin-top: 1rem;

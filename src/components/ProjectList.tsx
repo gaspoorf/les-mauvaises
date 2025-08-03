@@ -83,8 +83,6 @@ export function ProjectList({ projects, heroVisible }: ProjectListProps) {
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
-  
-
 
   useEffect(() => {
     const onWheel = (event: WheelEvent) => {
@@ -263,38 +261,39 @@ export function ProjectList({ projects, heroVisible }: ProjectListProps) {
         <TextSwitcher project={projects[currentIndex]} key={currentIndex} keyIndex={currentIndex} visible={!showDetails}/>
       )}
 
-      
-      <div ref={detailsRef} className={`${styles.detailsProject} ${MadeSoulmaze.className}`}>
-        <h2 className={Wildwick.className} >{projects[currentIndex]?.title}</h2>
-        <p>Détails du projet: {projects[currentIndex]?.description}</p><br/>
+      <div>
+        <div ref={detailsRef} className={`${styles.detailsProject} ${MadeSoulmaze.className}`}>
+          <h2 className={Wildwick.className} >{projects[currentIndex]?.title}</h2>
+          <p>Détails du projet: {projects[currentIndex]?.description}</p><br/>
 
-        <div className={MadeSoulmaze.className}>
-          
-          <h4 className={Wildwick.className}>Polices</h4>
-          <ul>
-            {projects[currentIndex]?.police_connection?.nodes?.map((police, index) => (
-              <li key={index}>
-                {police.title} ({police.policeName})
-              </li>
-            ))}
-          </ul><br/>
+          <div className={MadeSoulmaze.className}>
+            
+            <h4 className={Wildwick.className}>Polices</h4>
+            <ul>
+              {projects[currentIndex]?.police_connection?.nodes?.map((police, index) => (
+                <li key={index}>
+                  {police.title} ({police.policeName})
+                </li>
+              ))}
+            </ul><br/>
 
-          <h4 className={Wildwick.className}>Couleurs</h4>
-          <ul>
-            {projects[currentIndex]?.colors_connection?.nodes?.map((color, index) => (
-              <li key={index}>
-                {color.title} — <span style={{ color: color.hex }}>{color.hex}</span>
-              </li>
-            ))}
-          </ul>
+            <h4 className={Wildwick.className}>Couleurs</h4>
+            <ul>
+              {projects[currentIndex]?.colors_connection?.nodes?.map((color, index) => (
+                <li key={index}>
+                  {color.title} — <span style={{ color: color.hex }}>{color.hex}</span>
+                </li>
+              ))}
+            </ul>
 
-          { projects[currentIndex]?.url && 
-            <div className={styles.buttonContainer}>
-              <a href={projects[currentIndex]?.url} className={styles.websiteButton} target="_blank" rel="noopener noreferrer">Voir le projet</a>
-            </div>
-          }
+            { projects[currentIndex]?.url && 
+              <div className={styles.buttonContainer}>
+                <a href={projects[currentIndex]?.url} className={styles.websiteButton} target="_blank" rel="noopener noreferrer">Voir le projet</a>
+              </div>
+            }
+          </div>
+        
         </div>
-      
       </div>
       
 
