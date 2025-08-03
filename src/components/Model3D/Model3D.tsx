@@ -14,7 +14,7 @@ interface Model3DProps {
 
 
 export function Model3D({ modelPath, targetPosition, targetRotation, targetScale }: Model3DProps) {
-  const { scene } = useGLTF(modelPath);
+  // const { scene } = useGLTF(modelPath);
   const modelRef = useRef<any>(null);
   const wrapperRef = useRef<any>(null);
   const targetRotationY = useRef(0);
