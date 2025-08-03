@@ -83,10 +83,12 @@ export function ProjectList({ projects, heroVisible }: ProjectListProps) {
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
+  
+
+
   useEffect(() => {
     const onWheel = (event: WheelEvent) => {
       if (!lenis) return;
-
       if (isAnimating.current) return;
 
       if (isScrollBlocked) {
@@ -124,6 +126,58 @@ export function ProjectList({ projects, heroVisible }: ProjectListProps) {
     window.addEventListener("wheel", onWheel, { passive: false });
     return () => window.removeEventListener("wheel", onWheel);
   }, [currentIndex, projects.length, lenis, heroVisible, isScrollBlocked]);
+
+  useEffect(() => {
+  if (!lenis) return;
+
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let touchEndX = 0;
+  let touchEndY = 0;
+
+  const minSwipeDistance = 50;
+
+  const handleTouchStart = (e: TouchEvent) => {
+    const touch = e.changedTouches?.[0];
+    if (!touch) return;
+    touchStartX = touch.screenX;
+    touchStartY = touch.screenY;
+  };
+
+  const handleTouchEnd = (e: TouchEvent) => {
+    const touch = e.changedTouches?.[0];
+    if (!touch) return;
+    touchEndX = touch.screenX;
+    touchEndY = touch.screenY;
+
+    const deltaX = touchEndX - touchStartX;
+    const deltaY = touchEndY - touchStartY;
+
+    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > minSwipeDistance) {
+      if (isScrollBlocked) {
+        e.preventDefault();
+        return;
+      }
+
+      if (deltaX < 0 && currentIndex < projects.length - 1) {
+        lenis.stop();
+        goToSlide(currentIndex + 1);
+      } else if (deltaX > 0 && currentIndex > 0) {
+        lenis.stop();
+        goToSlide(currentIndex - 1);
+      }
+    }
+  };
+
+  window.addEventListener("touchstart", handleTouchStart, { passive: true });
+  window.addEventListener("touchend", handleTouchEnd, { passive: false }); // false pour pouvoir preventDefault()
+
+  return () => {
+    window.removeEventListener("touchstart", handleTouchStart);
+    window.removeEventListener("touchend", handleTouchEnd);
+  };
+}, [currentIndex, projects.length, lenis, isScrollBlocked]);
+
 
   useEffect(() => {
     if (!lenis) return;
