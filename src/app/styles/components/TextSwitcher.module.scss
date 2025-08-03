@@ -1,0 +1,51 @@
+@use "../variables" as *;
+
+.textContainer{
+    position: relative;
+
+    // h3 {
+    //     visibility: hidden;
+    // }
+
+    .textContent{
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        padding: 2rem;
+        pointer-events: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        z-index: 0;
+    }
+
+    .infosContent{
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        .years{
+            font-size: 5rem;
+            line-height: 4rem;
+            color: $color-yellow;
+        }
+
+        .description{
+            max-width: 50vw;
+            color: $color-white;
+            font-size: 1rem;
+
+            @include respond("md") {
+                max-width: none;
+                margin-bottom: 3rem;
+            }
+
+            
+        }
+
+    }
+
+    
+
+}

@@ -1,0 +1,48 @@
+@use "../variables" as *;
+
+.heroContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    text-align: center;
+    color: $color-black-gray;
+    background-color: $color-yellow;
+
+    .titleContainer{
+        position: relative;
+        h1{
+            font-size: 5rem;
+
+            @include respond("md") {
+                font-size: 3rem;
+                line-height: 3rem;
+            }
+
+        }
+
+        .name{
+            position: absolute;
+            right: -1.5rem;
+            bottom: 0;
+            transform: rotate(-12deg);
+            color: $color-pink;
+
+            @include respond("md") {
+                right: 18px;
+                bottom: -10px;
+            }
+
+        }
+
+    }
+
+  
+    p{
+        font-size: 1.5rem;
+        color: $color-black-gray;
+    }
+  
+}

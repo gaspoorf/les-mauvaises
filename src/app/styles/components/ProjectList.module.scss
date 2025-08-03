@@ -1,0 +1,81 @@
+@use "../variables" as *;
+
+.projectContainer{
+    height: 100vh;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    pointer-events: none;
+
+    .sceneContainer{
+        width: 100vw;
+        height: 100vh;
+        flex: 0 0 100vw;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow:hidden;
+              
+    }
+
+}
+
+.detailsProject{
+    color: $color-white;
+    width: 50vw;
+    position: absolute;
+    right: 0;
+    /* top: 2rem; */
+    margin-top: 1rem;
+    padding: 0 1rem 1rem 0;
+
+    .buttonContainer{
+        margin-top: 2rem;
+
+        .websiteButton{
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: transparent;
+            border: 1px solid $color-pink;
+            color: $color-pink;
+            transition: all 0.2s ease-in-out;
+
+            &:hover{
+                background-color: $color-pink;
+                color: $color-black-gray;
+            }
+        }
+
+    }
+
+   
+}
+
+.projectButton{
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10;
+    background-color: transparent;
+    border: 1px solid $color-yellow;
+    color: $color-yellow;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+
+    &:hover{
+        background-color: $color-yellow;
+        color: $color-black-gray;
+    }
+
+    @include respond("md") {
+        right: auto;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}

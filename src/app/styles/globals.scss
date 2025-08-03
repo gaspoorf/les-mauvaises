@@ -1,0 +1,41 @@
+// styles/globals.scss
+
+// Exemple de style global
+@use "./reset" as *;
+@use "./variables" as *;
+
+body{
+    background-color: $color-black-gray;
+}
+
+p{
+    color: $color-white;
+}
+
+
+h2{
+    color: $color-yellow;
+    font-size: 4rem;
+}
+
+h3{
+    color: $color-light-gray;
+    font-size: 9rem;
+    line-height: 7rem;
+    text-transform: uppercase;
+    font-weight: bold;
+
+    @include respond("md") {
+        font-size: 5rem;
+        line-height: 4rem;
+    }
+
+    @include respond("sm") {
+        font-size: 3rem;
+        line-height: 3rem;
+    }
+}
+
+h4{
+    font-size: 2rem;
+}
