@@ -7,7 +7,18 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ['@react-email/components'],
     webVitalsAttribution: ['CLS', 'LCP'],
+    largePageDataBytes: 128 * 1000, // 128KB pour les gros fichiers
   },
+  
+  // Configuration webpack pour les fichiers 3D
+  webpack: (config) => {
+    config.module.rules.push({
+      test: /\.(glb|gltf)$/,
+      type: 'asset/resource',
+    });
+    return config;
+  },
+  
   // Configuration des images pour autoriser les sources externes
   images: {
     formats: ['image/avif', 'image/webp'],
@@ -306,6 +317,20 @@ const nextConfig: NextConfig = {
           {
             key: 'Cache-Control',
             value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      // AJOUT : Headers spécifiques pour les fichiers GLB
+      {
+        source: '/models/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+          {
+            key: 'Content-Type',
+            value: 'model/gltf-binary',
           },
         ],
       },
