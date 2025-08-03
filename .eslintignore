@@ -17,7 +17,7 @@ coverage/
 *.css.map
 
 # Public assets
-public/
+# public/
 
 # Environment files
 .env*
