@@ -46,7 +46,12 @@
     p{
         opacity: 0;
         font-size: 1.5rem;
+        line-height: 25px;
         color: $color-black-gray;
+
+        @include respond("md") {
+            margin-top: 1.5rem;
+        }
     }
   
 }
