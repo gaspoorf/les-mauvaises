@@ -177,17 +177,24 @@ export function ProjectList({ projects, heroVisible }: ProjectListProps) {
       if (deltaX < 0 && currentIndex < projects.length - 1) {
         lenis.stop();
         goToSlide(currentIndex + 1);
-      } else if (deltaX > 0 && currentIndex > 0) {
-        lenis.stop();
-        document.documentElement.classList.add('overflow-desk');
-        document.querySelector('main')?.classList.add('overflow-desk');
-        goToSlide(currentIndex - 1);
+      } else if (deltaX > 0) {
+        if (currentIndex === 0) {
+          lenis.start();
+          document.documentElement.classList.remove('overflow-desk');
+          document.querySelector('main')?.classList.remove('overflow-desk');
+        } else {
+          lenis.stop();
+          document.documentElement.classList.add('overflow-desk');
+          document.querySelector('main')?.classList.add('overflow-desk');
+          goToSlide(currentIndex - 1);
+        }
       }
+
     }
   };
 
   window.addEventListener("touchstart", handleTouchStart, { passive: true });
-  window.addEventListener("touchend", handleTouchEnd, { passive: false }); // false pour pouvoir preventDefault()
+  window.addEventListener("touchend", handleTouchEnd, { passive: false });
 
   return () => {
     window.removeEventListener("touchstart", handleTouchStart);
