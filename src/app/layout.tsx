@@ -3,7 +3,7 @@ import './styles/globals.scss';
 import React from 'react';
 
 import { LenisProvider } from '@/app/hooks/useLenis';
-// import LoaderOverlay from '@/components/Loader';
+import LoaderOverlay from '@/components/Loader';
 
 export default function RootLayout({
   children,
@@ -14,7 +14,7 @@ export default function RootLayout({
     <html lang="fr">
       <head />
       <body>
-        {/* <LoaderOverlay /> */}
+        <LoaderOverlay />
         <LenisProvider>
           <main>{children}</main>
         </LenisProvider>
