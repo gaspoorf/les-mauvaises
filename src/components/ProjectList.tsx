@@ -11,6 +11,7 @@ import { TextSwitcher } from "./TextSwitcher";
 import { useLenis } from "@/app/hooks/useLenis";
 import { MadeSoulmaze } from '@/utils/fonts';
 import { Wildwick } from '@/utils/fonts';
+import { useIsMobile } from "@/app/hooks/useIsMobile"; 
 
 
 interface ProjectListProps {
@@ -28,6 +29,16 @@ export function ProjectList({ projects, heroVisible }: ProjectListProps) {
   const [isScrollBlocked, setIsScrollBlocked] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
   const cameraRef = useRef<THREE.Camera | null>(null);
+
+  const isMobile = useIsMobile();
+
+  const cameraPositionFront: [number, number, number] = isMobile
+    ? [10, 5, -10]
+    : [20, 5, 15];
+
+  const cameraPositionBack: [number, number, number] = isMobile
+    ? [-10, -20, 50]
+    : [-10, 10, 30];
 
 
   useEffect(() => {
@@ -208,29 +219,29 @@ export function ProjectList({ projects, heroVisible }: ProjectListProps) {
   };
 
   const [lookAtTarget, setLookAtTarget] = useState(new THREE.Vector3(0, 2, 0));
-
-
   const animateLookAt = (newTarget: THREE.Vector3) => {
-  const temp = lookAtTarget.clone();
-  gsap.to(temp, {
-    x: newTarget.x,
-    y: newTarget.y,
-    z: newTarget.z,
-    duration: 1,
-    ease: "power2.inOut",
-    onUpdate: () => {
-      setLookAtTarget(temp.clone());
-    },
-  });
-};
+    const temp = lookAtTarget.clone();
+
+    gsap.to(temp, {
+      x: newTarget.x,
+      y: newTarget.y,
+      z: newTarget.z,
+      duration: 1,
+      ease: "power2.inOut",
+      onUpdate: () => {
+        setLookAtTarget(temp.clone());
+      },
+    });
+  };
+
 
 
   const animateCameraForward = () => {
     if (!cameraRef.current) return;
     gsap.to(cameraRef.current.position, {
-      z: 15,
-      x: 20,
-      y: 5,
+      x: cameraPositionFront[0],
+      y: cameraPositionFront[1],
+      z: cameraPositionFront[2],
 
       duration: 1,
       ease: "power2.inOut",
@@ -241,9 +252,10 @@ export function ProjectList({ projects, heroVisible }: ProjectListProps) {
   const animateCameraBack = () => {
     if (!cameraRef.current) return;
     gsap.to(cameraRef.current.position, {
-      z: 30,
-      x: -10,
-      y: 10,
+      x: cameraPositionBack[0],
+      y: cameraPositionBack[1],
+      z: cameraPositionBack[2],
+      
       duration: 1,
       ease: "power2.inOut",
       onComplete: () => setShowDetails(false),
@@ -264,8 +276,12 @@ export function ProjectList({ projects, heroVisible }: ProjectListProps) {
             animateCameraBack();
             animateLookAt(new THREE.Vector3(0, 2, 0)); 
           } else {
+            const forwardTarget = isMobile
+              ? new THREE.Vector3(10, 2, -10)
+              : new THREE.Vector3(10, 2, 0);
+
             animateCameraForward();
-            animateLookAt(new THREE.Vector3(10, 2, 0));
+            animateLookAt(forwardTarget);
           }
         }}      
       >
@@ -321,7 +337,7 @@ export function ProjectList({ projects, heroVisible }: ProjectListProps) {
                 <Model3D
                   key={project.title}
                   modelPath={project.modelUrl!}
-                  targetPosition={[(offset * visibleWidth) / 2, 0, 0]}
+                  targetPosition={[(offset * visibleWidth) / 1.5, 0, 0]}
                   targetRotation={-offset}
                   targetScale={offset === 0 ? 1.2 : 0.8}
                 />

@@ -5,7 +5,11 @@ import { useProgress } from '@react-three/drei';
 import styles from "@/app/styles/components/Loader.module.scss";
 import { MadeSoulmaze } from '@/utils/fonts';
 
-export default function LoaderOverlay() {
+interface LoaderOverlayProps {
+  onLoaded?: () => void;
+}
+
+export default function LoaderOverlay({ onLoaded }: LoaderOverlayProps) {
   const { active, progress } = useProgress();
   const [showLoader, setShowLoader] = useState(true);
   const [fadeOut, setFadeOut] = useState(false);
@@ -21,17 +25,22 @@ export default function LoaderOverlay() {
       setHasLoadedOnce(true);
     } else if (hasLoadedOnce) {
       setFadeOut(true);
+      
+
+      timer = setTimeout(() => {
+        if (onLoaded) onLoaded();
+      }, 1000);
 
       timer = setTimeout(() => {
         setShowLoader(false);
         document.body.style.overflow = '';
-      }, 2000 + 500);
+      }, 2500);
     }
 
     return () => {
       if (timer) clearTimeout(timer);
     };
-  }, [active, hasLoadedOnce]);
+  }, [active, hasLoadedOnce, onLoaded]);
 
   if (!showLoader) return null;
 

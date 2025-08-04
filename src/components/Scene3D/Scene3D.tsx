@@ -43,7 +43,7 @@ export function Scene3D({ children, onCameraReady, lookAtTarget }: Scene3DProps)
   const isMobile = useIsMobile();
 
   const cameraPosition: [number, number, number] = isMobile
-    ? [-10, 8, 45]
+    ? [-10, -20, 50]
     : [-10, 10, 30];
 
   return (

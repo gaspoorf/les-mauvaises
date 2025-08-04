@@ -1,4 +1,3 @@
-// src/lib/strapi/withModelUrl.ts
 import { Project } from "@/types/Project";
 import { modelsMap } from "./modelsMap";
 

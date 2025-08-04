@@ -29,6 +29,11 @@
             font-size: 5rem;
             line-height: 4rem;
             color: $color-yellow;
+
+            @include respond("md") {
+                font-size: 4rem;
+                line-height: 3rem;
+            }
         }
 
         .description{
@@ -39,8 +44,8 @@
             @include respond("md") {
                 max-width: none;
                 margin-bottom: 3rem;
+                font-size: 0.875rem;
             }
-
             
         }
 
