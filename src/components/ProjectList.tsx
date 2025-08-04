@@ -261,8 +261,8 @@ export function ProjectList({ projects, heroVisible }: ProjectListProps) {
         <TextSwitcher project={projects[currentIndex]} key={currentIndex} keyIndex={currentIndex} visible={!showDetails}/>
       )}
 
-      <div>
-        <div ref={detailsRef} className={`${styles.detailsProject} ${MadeSoulmaze.className}`}>
+      <div ref={detailsRef} className={`${styles.detailsContainer} ${MadeSoulmaze.className}`}>
+        <div  className={`${styles.detailsProject} ${MadeSoulmaze.className}`}>
           <h2 className={Wildwick.className} >{projects[currentIndex]?.title}</h2>
           <p>Détails du projet: {projects[currentIndex]?.description}</p><br/>
 

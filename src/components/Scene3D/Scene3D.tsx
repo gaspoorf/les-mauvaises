@@ -4,6 +4,7 @@ import styles from "@/app/styles/components/Scene3D.module.scss";
 import * as THREE from 'three';
 import React, { useEffect } from "react";
 import { Controls3D } from "../Controls3D";
+import { useIsMobile } from "@/app/hooks/useIsMobile"; 
 
 import { Canvas, useThree, useFrame} from '@react-three/fiber';
 
@@ -39,9 +40,15 @@ function MouseParallaxCamera({
 
 export function Scene3D({ children, onCameraReady, lookAtTarget }: Scene3DProps) {
 
+  const isMobile = useIsMobile();
+
+  const cameraPosition: [number, number, number] = isMobile
+    ? [-10, 8, 45]
+    : [-10, 10, 30];
+
   return (
     <div className={styles.canvasContainer}>
-      <Canvas camera={{ position: [-10, 10, 30], fov: 50 }} gl={{ antialias: false }}>
+      <Canvas camera={{ position: cameraPosition, fov: 50 }} gl={{ antialias: true }}>
         <MouseParallaxCamera onCameraReady={onCameraReady} lookAtTarget={lookAtTarget} />
         <ambientLight intensity={0.5} />
         <directionalLight position={[10, 10, 10]} intensity={2} />

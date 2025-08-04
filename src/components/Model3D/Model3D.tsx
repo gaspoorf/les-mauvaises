@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useGLTF, Center } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import gsap from "gsap";
+import * as THREE from 'three';
 
 interface Model3DProps {
   modelPath: string;
@@ -15,12 +16,30 @@ interface Model3DProps {
 
 export function Model3D({ modelPath, targetPosition, targetRotation, targetScale }: Model3DProps) {
   const { scene } = useGLTF(modelPath);
+  console.log("Scene loaded", scene);
   const modelRef = useRef<any>(null);
   const wrapperRef = useRef<any>(null);
   const targetRotationY = useRef(0);
   const currentRotationY = useRef(0);
 
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    if (!scene) return;
+
+    scene.traverse((child) => {
+      if ((child as any).isMesh) {
+        const mesh = child as THREE.Mesh;
+        const material = mesh.material as THREE.MeshStandardMaterial;
+
+        material.metalness = 0.3;
+        material.roughness = 0.2; 
+
+        material.needsUpdate = true;
+      }
+    });
+  }, [scene]);
+
 
   useEffect(() => {
     const onMouseMove = (e: MouseEvent) => {
