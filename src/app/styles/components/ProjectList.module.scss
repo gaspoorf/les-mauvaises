@@ -1,7 +1,7 @@
 @use "../variables" as *;
 
 .projectContainer{
-    height: 100vh;
+    height: 100dvh;
     display: flex;
     overflow: hidden;
     position: relative;
@@ -10,7 +10,7 @@
 
     .sceneContainer{
         width: 100vw;
-        height: 100vh;
+        height: 100dvh;
         flex: 0 0 100vw;
         position: relative;
         display: flex;
@@ -23,7 +23,7 @@
 }
 
 .detailsContainer{
-    height: 100vh;
+    height: 100dvh;
     position: fixed;
     top: 45%;
     right: 0;

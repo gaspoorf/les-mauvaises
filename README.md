@@ -50,7 +50,7 @@ src/
 
 ### 1. Page d'Accueil avec Hero Section 3D
 
-- [ ] Créer une page 100vh avec un défillement des projets
+- [ ] Créer une page 100dvh avec un défillement des projets
 - [ ] Intégrer les modèles 3D (.glb) dans la scène
 - [ ] Animation et visuel libre avec interactions 3D
 - [ ] Récupérer et afficher les informations depuis le Strapi via la méthode fetchGraphql

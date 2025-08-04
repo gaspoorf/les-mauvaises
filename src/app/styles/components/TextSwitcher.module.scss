@@ -11,7 +11,7 @@
         position: absolute;
         top: 0;
         left: 0;
-        height: 100vh;
+        height: 100dvh;
         padding: 2rem;
         pointer-events: none;
         display: flex;
@@ -20,7 +20,7 @@
         z-index: 0;
 
         @include respond("md") {
-            padding-top: 7rem;
+            padding-top: 2rem;
         }
 
     }
