@@ -10,17 +10,17 @@ export function useLoadingState() {
         if (!mainEl) return;
 
         const observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-            if (mutation.type === 'attributes' && mutation.attributeName === 'data-loaded') {
-            const loadedValue = mainEl.getAttribute('data-loaded');
-            setIsLoaded(loadedValue === 'true');
-            }
-        });
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'data-loaded') {
+                const loadedValue = mainEl.getAttribute('data-loaded');
+                setIsLoaded(loadedValue === 'true');
+                }
+            });
         });
 
         observer.observe(mainEl, {
-        attributes: true,
-        attributeFilter: ['data-loaded']
+            attributes: true,
+            attributeFilter: ['data-loaded']
         });
 
         const initialValue = mainEl.getAttribute('data-loaded');

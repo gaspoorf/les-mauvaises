@@ -6,7 +6,7 @@ import Lenis from "lenis";
 const LenisContext = createContext<Lenis | null>(null);
 
 export function LenisProvider({ children }: { children: React.ReactNode }) {
-   const [lenisInstance, setLenisInstance] = useState<Lenis | null>(null);
+  const [lenisInstance, setLenisInstance] = useState<Lenis | null>(null);
 
   useEffect(() => {
     const lenis = new Lenis({

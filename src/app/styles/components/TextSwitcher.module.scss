@@ -18,6 +18,11 @@
         flex-direction: column;
         justify-content: space-between;
         z-index: 0;
+
+        @include respond("md") {
+            padding-top: 5rem;
+        }
+
     }
 
     .infosContent{
