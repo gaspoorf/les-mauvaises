@@ -101,6 +101,9 @@ export function ProjectList({ projects, heroVisible }: ProjectListProps) {
         if (!heroVisible) {
           event.preventDefault();
           lenis.stop();
+          document.documentElement.style.overflow = 'hidden';
+          document.body.style.overflow = 'hidden';
+          document.querySelector('main')?.style.setProperty('overflow', 'hidden');
           goToSlide(currentIndex + 1);
         }
       }
@@ -113,9 +116,15 @@ export function ProjectList({ projects, heroVisible }: ProjectListProps) {
             return;
           }
           lenis.start();
+          document.documentElement.style.overflowY = 'auto';
+          document.body.style.overflowY = 'auto';
+          document.querySelector('main')?.style.setProperty('overflow-y', 'auto');
         } else {
           event.preventDefault();
           lenis.stop();
+          document.documentElement.style.overflow = 'hidden';
+          document.body.style.overflow = 'hidden';
+          document.querySelector('main')?.style.setProperty('overflow', 'hidden');
           goToSlide(currentIndex - 1);
         }
       }
@@ -162,6 +171,9 @@ export function ProjectList({ projects, heroVisible }: ProjectListProps) {
         goToSlide(currentIndex + 1);
       } else if (deltaX > 0 && currentIndex > 0) {
         lenis.stop();
+        document.documentElement.style.overflow = 'hidden';
+        document.body.style.overflow = 'hidden';
+        document.querySelector('main')?.style.setProperty('overflow', 'hidden');
         goToSlide(currentIndex - 1);
       }
     }
@@ -184,6 +196,9 @@ export function ProjectList({ projects, heroVisible }: ProjectListProps) {
       // lenis.start();
     } else {
       lenis.stop();
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden';
+      document.querySelector('main')?.style.setProperty('overflow', 'hidden');
     }
   }, [currentIndex, lenis, showDetails]);
 
