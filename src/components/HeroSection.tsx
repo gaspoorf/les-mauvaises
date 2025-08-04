@@ -31,7 +31,7 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(({animate }, ref) 
     gsap.fromTo(
       splitTitle.chars,
       { x: 20, autoAlpha: 0 },
-      { x: 0, autoAlpha: 1, duration: 0.7, ease: "power2.out", stagger: 0.05 }
+      { x: 0, autoAlpha: 1, duration: 0.8, ease: "power2.inOut", stagger: 0.05 }
     );
 
   }, [animate]);
@@ -45,7 +45,7 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(({animate }, ref) 
     gsap.fromTo(
       descEl,
       { x: 20, autoAlpha: 0 },
-      { x: 0, autoAlpha: 1, duration: 0.7, ease: "power2.out", delay: 0.5 }
+      { x: 0, autoAlpha: 1, duration: 0.7, ease: "power2.inOut", delay: 0.7 }
     );
 
   }, [animate]);
@@ -59,7 +59,7 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(({animate }, ref) 
     gsap.fromTo(
       nameEl,
       { autoAlpha: 0 },
-      { autoAlpha: 1, duration: 0.2, ease: "power2.inOut", delay: 1.2 }
+      { autoAlpha: 1, duration: 0.2, ease: "power2.inOut", delay: 1.3 }
     );
 
   }, [animate]);

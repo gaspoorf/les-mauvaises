@@ -29,7 +29,7 @@ export default function LoaderOverlay({ onLoaded }: LoaderOverlayProps) {
 
       timer = setTimeout(() => {
         if (onLoaded) onLoaded();
-      }, 1000);
+      }, 1100);
 
       timer = setTimeout(() => {
         setShowLoader(false);

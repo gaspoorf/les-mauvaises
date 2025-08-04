@@ -113,7 +113,6 @@ export function ProjectList({ projects, heroVisible }: ProjectListProps) {
           event.preventDefault();
           lenis.stop();
           document.documentElement.style.overflow = 'hidden';
-          document.body.style.overflow = 'hidden';
           document.querySelector('main')?.style.setProperty('overflow', 'hidden');
           goToSlide(currentIndex + 1);
         }
@@ -128,13 +127,11 @@ export function ProjectList({ projects, heroVisible }: ProjectListProps) {
           }
           lenis.start();
           document.documentElement.style.overflowY = 'auto';
-          document.body.style.overflowY = 'auto';
           document.querySelector('main')?.style.setProperty('overflow-y', 'auto');
         } else {
           event.preventDefault();
           lenis.stop();
           document.documentElement.style.overflow = 'hidden';
-          document.body.style.overflow = 'hidden';
           document.querySelector('main')?.style.setProperty('overflow', 'hidden');
           goToSlide(currentIndex - 1);
         }
@@ -183,7 +180,6 @@ export function ProjectList({ projects, heroVisible }: ProjectListProps) {
       } else if (deltaX > 0 && currentIndex > 0) {
         lenis.stop();
         document.documentElement.style.overflow = 'hidden';
-        document.body.style.overflow = 'hidden';
         document.querySelector('main')?.style.setProperty('overflow', 'hidden');
         goToSlide(currentIndex - 1);
       }
@@ -208,7 +204,6 @@ export function ProjectList({ projects, heroVisible }: ProjectListProps) {
     } else {
       lenis.stop();
       document.documentElement.style.overflow = 'hidden';
-      document.body.style.overflow = 'hidden';
       document.querySelector('main')?.style.setProperty('overflow', 'hidden');
     }
   }, [currentIndex, lenis, showDetails]);
@@ -295,7 +290,7 @@ export function ProjectList({ projects, heroVisible }: ProjectListProps) {
       <div ref={detailsRef} className={`${styles.detailsContainer} ${MadeSoulmaze.className}`}>
         <div  className={`${styles.detailsProject} ${MadeSoulmaze.className}`}>
           <h2 className={Wildwick.className} >{projects[currentIndex]?.title}</h2>
-          <p>Détails du projet: {projects[currentIndex]?.description}</p><br/>
+          <p>{projects[currentIndex]?.description}</p><br/>
 
           <div className={MadeSoulmaze.className}>
             
