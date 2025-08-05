@@ -2,11 +2,11 @@
 
 Ce projet est un portfolio interactif développé pour le test technique des Mauvaises. Il présente différents projets à travers une expérience immersive mêlant animations, modèles 3D et interactions fluides.
 
-> 🎯 Réalisé avec Next.js 15, React Three Fiber, GSAP, Lenis et Strapi (GraphQL).
+🎯 Réalisé avec Next.js 15, React Three Fiber, GSAP, Lenis et Strapi (GraphQL).
 
 ---
 
-## 🚀 Fonctionnalités principales
+## 🎨 Fonctionnalités principales
 
 - Chargement dynamique des projets depuis une API Strapi (GraphQL)
 - Scroll horizontal fluide entre les projets
@@ -17,7 +17,7 @@ Ce projet est un portfolio interactif développé pour le test technique des Mau
 
 ---
 
-## 🎮 Optimisations et performance
+## ⚙️ Optimisations et performance
 
 - Compression des modèles 3D et des textures (optimisés via Blender et GIMP)
 - Loader animé pendant l'initialisation (préchargement des assets en arrière-plan)
@@ -55,7 +55,7 @@ Ce projet est un portfolio interactif développé pour le test technique des Mau
 
 ---
 
-## ⚡ Installation & démarrage
+## 🛠️ Installation & démarrage
 
 Pour lancer le projet en local :
 
