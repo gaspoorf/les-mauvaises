@@ -8,6 +8,10 @@
     z-index: 1;
     pointer-events: none;
 
+    @include respond("md") {
+        height: 100dvh;
+    }
+
     .sceneContainer{
         width: 100vw;
         height: 101dvh;
@@ -17,6 +21,10 @@
         justify-content: center;
         align-items: center;
         overflow:hidden;
+
+        @include respond("md") {
+            height: 100dvh;
+        }
               
     }
 
