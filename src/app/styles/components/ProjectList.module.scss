@@ -1,22 +1,30 @@
 @use "../variables" as *;
 
 .projectContainer{
-    height: 100dvh;
+    height: 101dvh;
     display: flex;
     overflow: hidden;
     position: relative;
     z-index: 1;
     pointer-events: none;
 
+    @include respond("md") {
+        height: 100dvh;
+    }
+
     .sceneContainer{
         width: 100vw;
-        height: 100dvh;
+        height: 101dvh;
         flex: 0 0 100vw;
         position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
         overflow:hidden;
+
+        @include respond("md") {
+            height: 100dvh;
+        }
               
     }
 
