@@ -5,6 +5,7 @@ import Lenis from "lenis";
 
 const LenisContext = createContext<Lenis | null>(null);
 
+// Lenis pour gérer le smooth scroll
 export function LenisProvider({ children }: { children: React.ReactNode }) {
   const [lenisInstance, setLenisInstance] = useState<Lenis | null>(null);
 

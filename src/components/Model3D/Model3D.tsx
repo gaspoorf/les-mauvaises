@@ -13,7 +13,7 @@ interface Model3DProps {
   targetScale: number;
 }
 
-
+// charge et anime le modele 3D
 export function Model3D({ modelPath, targetPosition, targetRotation, targetScale }: Model3DProps) {
   const { scene } = useGLTF(modelPath);
   const modelRef = useRef<any>(null);
@@ -23,6 +23,7 @@ export function Model3D({ modelPath, targetPosition, targetRotation, targetScale
 
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
+  // personnalisation du materiau
   useEffect(() => {
     if (!scene) return;
 
@@ -40,6 +41,7 @@ export function Model3D({ modelPath, targetPosition, targetRotation, targetScale
   }, [scene]);
 
 
+  // recupère position de la souris
   useEffect(() => {
     const onMouseMove = (e: MouseEvent) => {
       const x = (e.clientX / window.innerWidth) * 2 - 1;
@@ -52,12 +54,11 @@ export function Model3D({ modelPath, targetPosition, targetRotation, targetScale
   }, []);
 
 
-
+  // rotation du modèle + inclinaison en fonction de la souris
   useFrame(() => {
     if (!modelRef.current) return;
     targetRotationY.current += 0.003;
     
-
     currentRotationY.current += (targetRotationY.current - currentRotationY.current) * 0.1;
 
     modelRef.current.rotation.y = currentRotationY.current;
@@ -66,11 +67,9 @@ export function Model3D({ modelPath, targetPosition, targetRotation, targetScale
     
     modelRef.current.rotation.x += ((-mousePos.y * maxIncline) - modelRef.current.rotation.x) * 0.1;
     modelRef.current.rotation.z += ((-mousePos.x * maxIncline) - modelRef.current.rotation.z) * 0.1;
-
-
-  
   });
 
+  // animation de position et rotation du modele
   useEffect(() => {
     if (!wrapperRef.current || !modelRef.current) return;
 

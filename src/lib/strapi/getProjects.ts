@@ -32,7 +32,7 @@ const PROJECTS_QUERY = /* GraphQL */ `
   }
 `;
 
-
+// récupère la liste des projets
 export async function getProjects(): Promise<Project[]> {
   const data = await fetchGraphQL<ProjectsResponse>(PROJECTS_QUERY);
 

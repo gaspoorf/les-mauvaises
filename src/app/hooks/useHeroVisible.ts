@@ -1,5 +1,6 @@
 import { useEffect, useState, RefObject } from 'react';
 
+// hook qui détecte si un élément est visible dans le viewport
 export function useHeroVisible(ref: RefObject<HTMLElement | null>, threshold = 0.2) {
   const [isVisible, setIsVisible] = useState(true);
 

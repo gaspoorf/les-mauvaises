@@ -1,5 +1,6 @@
 'use client';
 
+// fait défiler la page vers le haut au changement de page
 import {useGSAP} from '@gsap/react';
 import {usePathname} from 'next/navigation';
 import gsap from 'gsap';

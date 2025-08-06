@@ -15,12 +15,13 @@ interface TextSwitcherProps {
   visible: boolean;
 }
 
+// anime les infos au changement de projet
 export function TextSwitcher({ project, keyIndex, visible  }: TextSwitcherProps) {
   const textRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const yearsRef = useRef<HTMLParagraphElement>(null);
 
-
+  // anime les tags
   useEffect(() => {
     const textEl = textRef.current;
     if (!textEl) return;
@@ -42,6 +43,7 @@ export function TextSwitcher({ project, keyIndex, visible  }: TextSwitcherProps)
 
   }, [keyIndex , visible]);
 
+  // anime l'année
   useEffect(() => {
     const yearsEl = yearsRef.current;
     if (!yearsEl) return;
@@ -63,6 +65,7 @@ export function TextSwitcher({ project, keyIndex, visible  }: TextSwitcherProps)
 
   }, [keyIndex , visible]);
 
+  // anime le titre
   useEffect(() => {
     const titleEl = titleRef.current;
     if (!titleEl) return;
@@ -93,20 +96,20 @@ export function TextSwitcher({ project, keyIndex, visible  }: TextSwitcherProps)
 
   return (
     <div className={styles.textContainer}>
-    <div className={styles.textContent}>
-      <h3 ref={titleRef} className={MadeSoulmaze.className}>{project.title}</h3>
+      <div className={styles.textContent}>
+        <h3 ref={titleRef} className={MadeSoulmaze.className}>{project.title}</h3>
 
-      <div className={styles.infosContent}>
+        <div className={styles.infosContent}>
 
-        <p ref={yearsRef} className={`${styles.years} ${Wildwick.className}`}>{project.years}</p>
+          <p ref={yearsRef} className={`${styles.years} ${Wildwick.className}`}>{project.years}</p>
 
-        <div ref={textRef} className={`${styles.description} ${MadeSoulmaze.className}`}>
-            {project.tags?.map((tagObj, index) => (
-                <span key={index}>{tagObj.tag}{index < project.tags.length - 1 ? ' / ' : ''}</span>
-            ))}
+          <div ref={textRef} className={`${styles.description} ${MadeSoulmaze.className}`}>
+              {project.tags?.map((tagObj, index) => (
+                  <span key={index}>{tagObj.tag}{index < project.tags.length - 1 ? ' / ' : ''}</span>
+              ))}
+          </div>
+        
         </div>
-       
-      </div>
       
       </div>
     </div>

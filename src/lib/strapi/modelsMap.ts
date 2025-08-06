@@ -1,3 +1,4 @@
+// associe chaque titre de projet à son modele 3D
 export const modelsMap: Record<string, string> = {
   "Arte": "arte.glb",
   "Floa": "floa.glb",

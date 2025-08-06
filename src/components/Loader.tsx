@@ -15,6 +15,7 @@ export default function LoaderOverlay({ onLoaded }: LoaderOverlayProps) {
   const [fadeOut, setFadeOut] = useState(false);
   const [hasLoadedOnce, setHasLoadedOnce] = useState(false);
 
+  // gère l'affichage, la fin du loader et le fondu
   useEffect(() => {
     let timer: NodeJS.Timeout | null = null;
 

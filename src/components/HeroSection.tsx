@@ -12,12 +12,14 @@ interface HeroSectionProps {
   animate?: boolean;
 }
 
+// hero section 
 const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(({animate }, ref) => {
 
   const titleRef = useRef<HTMLHeadingElement>(null);
   const nameRef = useRef<HTMLHeadingElement>(null); 
   const descRef = useRef<HTMLHeadingElement>(null);
 
+  // animation du titre
   useEffect(() => {
     if (!animate) return;
 
@@ -36,6 +38,7 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(({animate }, ref) 
 
   }, [animate]);
 
+  // animation de la baseline
   useEffect(() => {
     if (!animate) return;
 
@@ -50,6 +53,7 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(({animate }, ref) 
 
   }, [animate]);
 
+  // animation du nom
   useEffect(() => {
     if (!animate) return;
 

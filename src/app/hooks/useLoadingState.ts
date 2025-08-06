@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react';
 
+
+// hook qui indique si la page principale est complètement chargée
 export function useLoadingState() {
     const [isLoaded, setIsLoaded] = useState(false);
 

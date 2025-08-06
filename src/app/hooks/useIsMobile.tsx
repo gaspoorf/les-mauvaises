@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+// hook qui détecte si l'utilisateur est sur mobile
 export function useIsMobile(breakpoint = 768) {
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {

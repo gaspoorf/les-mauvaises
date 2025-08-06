@@ -11,6 +11,7 @@ interface HomepageClientProps {
   projects: Project[];
 }
 
+// affiche la hero section et la liste des projets
 export default function HomepageClient({ projects }: HomepageClientProps) {
   const heroRef = useRef<HTMLElement>(null);
   const heroVisible = useHeroVisible(heroRef, 0.0001);

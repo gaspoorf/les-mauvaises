@@ -19,19 +19,22 @@ interface ProjectListProps {
   heroVisible: boolean;
 }
 
+// affiche la liste interractive des projets
 export function ProjectList({ projects, heroVisible }: ProjectListProps) {
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
-  const isAnimating = useRef(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const lenis = useLenis();
-
-  const detailsRef = useRef<HTMLDivElement>(null);
+  const isAnimating = useRef(false);
+  
   const [isScrollBlocked, setIsScrollBlocked] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
+
+  const detailsRef = useRef<HTMLDivElement>(null);
   const cameraRef = useRef<THREE.Camera | null>(null);
 
   const isMobile = useIsMobile();
 
+  // positions de la caméra en fonction du device
   const cameraPositionFront: [number, number, number] = isMobile
     ? [10, 5, -10]
     : [20, 5, 15];
@@ -41,12 +44,13 @@ export function ProjectList({ projects, heroVisible }: ProjectListProps) {
     : [-10, 10, 30];
 
 
+  // bloc le scroll quand détails affichés
   useEffect(() => {
     setIsScrollBlocked(showDetails);
   }, [showDetails]);
 
 
-
+  // anime les infos des projets
   useEffect(() => {
     const el = detailsRef.current;
     if (!el) return;
@@ -72,6 +76,7 @@ export function ProjectList({ projects, heroVisible }: ProjectListProps) {
     }
   }, [showDetails]);
 
+  // transition de projet
   const goToSlide = (index: number) => {
     if (isScrollBlocked) return;
     if (index < 0 || index >= projects.length) return;
@@ -87,6 +92,7 @@ export function ProjectList({ projects, heroVisible }: ProjectListProps) {
   };
 
 
+  // gère le resize de la fenetre
   useEffect(() => {
     setWindowSize({ width: window.innerWidth, height: window.innerHeight });
     const onResize = () => setWindowSize({ width: window.innerWidth, height: window.innerHeight });
@@ -94,7 +100,7 @@ export function ProjectList({ projects, heroVisible }: ProjectListProps) {
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
-
+  // gère le scroll avec la molette de la souris
   useEffect(() => {
     const onWheel = (event: WheelEvent) => {
       if (!lenis) return;
@@ -142,67 +148,70 @@ export function ProjectList({ projects, heroVisible }: ProjectListProps) {
     return () => window.removeEventListener("wheel", onWheel);
   }, [currentIndex, projects.length, lenis, heroVisible, isScrollBlocked]);
 
+
+  // gère le swipe droite/gauche sur mobile
   useEffect(() => {
-  if (!lenis) return;
+    if (!lenis) return;
 
-  let touchStartX = 0;
-  let touchStartY = 0;
-  let touchEndX = 0;
-  let touchEndY = 0;
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchEndX = 0;
+    let touchEndY = 0;
 
-  const minSwipeDistance = 50;
+    const minSwipeDistance = 50;
 
-  const handleTouchStart = (e: TouchEvent) => {
-    const touch = e.changedTouches?.[0];
-    if (!touch) return;
-    touchStartX = touch.screenX;
-    touchStartY = touch.screenY;
-  };
+    const handleTouchStart = (e: TouchEvent) => {
+      const touch = e.changedTouches?.[0];
+      if (!touch) return;
+      touchStartX = touch.screenX;
+      touchStartY = touch.screenY;
+    };
 
-  const handleTouchEnd = (e: TouchEvent) => {
-    const touch = e.changedTouches?.[0];
-    if (!touch) return;
-    touchEndX = touch.screenX;
-    touchEndY = touch.screenY;
+    const handleTouchEnd = (e: TouchEvent) => {
+      const touch = e.changedTouches?.[0];
+      if (!touch) return;
+      touchEndX = touch.screenX;
+      touchEndY = touch.screenY;
 
-    const deltaX = touchEndX - touchStartX;
-    const deltaY = touchEndY - touchStartY;
+      const deltaX = touchEndX - touchStartX;
+      const deltaY = touchEndY - touchStartY;
 
-    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > minSwipeDistance) {
-      if (isScrollBlocked) {
-        e.preventDefault();
-        return;
-      }
-
-      if (deltaX < 0 && currentIndex < projects.length - 1) {
-        lenis.stop();
-        goToSlide(currentIndex + 1);
-      } else if (deltaX > 0) {
-        if (currentIndex === 0) {
-          lenis.start();
-          document.documentElement.classList.remove('overflow-desk');
-          document.querySelector('main')?.classList.remove('overflow-desk');
-        } else {
-          lenis.stop();
-          document.documentElement.classList.add('overflow-desk');
-          document.querySelector('main')?.classList.add('overflow-desk');
-          goToSlide(currentIndex - 1);
+      if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > minSwipeDistance) {
+        if (isScrollBlocked) {
+          e.preventDefault();
+          return;
         }
+
+        if (deltaX < 0 && currentIndex < projects.length - 1) {
+          lenis.stop();
+          goToSlide(currentIndex + 1);
+        } else if (deltaX > 0) {
+          if (currentIndex === 0) {
+            lenis.start();
+            document.documentElement.classList.remove('overflow-desk');
+            document.querySelector('main')?.classList.remove('overflow-desk');
+          } else {
+            lenis.stop();
+            document.documentElement.classList.add('overflow-desk');
+            document.querySelector('main')?.classList.add('overflow-desk');
+            goToSlide(currentIndex - 1);
+          }
+        }
+
       }
+    };
 
-    }
-  };
+    window.addEventListener("touchstart", handleTouchStart, { passive: true });
+    window.addEventListener("touchend", handleTouchEnd, { passive: false });
 
-  window.addEventListener("touchstart", handleTouchStart, { passive: true });
-  window.addEventListener("touchend", handleTouchEnd, { passive: false });
-
-  return () => {
-    window.removeEventListener("touchstart", handleTouchStart);
-    window.removeEventListener("touchend", handleTouchEnd);
-  };
-}, [currentIndex, projects.length, lenis, isScrollBlocked]);
+    return () => {
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchend", handleTouchEnd);
+    };
+  }, [currentIndex, projects.length, lenis, isScrollBlocked]);
 
 
+  // bloquer le scroll 
   useEffect(() => {
     if (!lenis) return;
 
@@ -221,6 +230,8 @@ export function ProjectList({ projects, heroVisible }: ProjectListProps) {
   };
 
   const [lookAtTarget, setLookAtTarget] = useState(new THREE.Vector3(0, 2, 0));
+  
+  // anime le changement de vue de la camera
   const animateLookAt = (newTarget: THREE.Vector3) => {
     const temp = lookAtTarget.clone();
 
@@ -237,7 +248,7 @@ export function ProjectList({ projects, heroVisible }: ProjectListProps) {
   };
 
 
-
+  // anime la caméra vers l'avant
   const animateCameraForward = () => {
     if (!cameraRef.current) return;
     gsap.to(cameraRef.current.position, {
@@ -251,6 +262,7 @@ export function ProjectList({ projects, heroVisible }: ProjectListProps) {
     });
   };
 
+  // anime la caméra vers l'arrière
   const animateCameraBack = () => {
     if (!cameraRef.current) return;
     gsap.to(cameraRef.current.position, {
@@ -264,6 +276,7 @@ export function ProjectList({ projects, heroVisible }: ProjectListProps) {
     });
   };
 
+  // largeur visible de la scène
   const cameraZ = 50;
   const fov = 75;
   const aspect = windowSize.width / windowSize.height;
